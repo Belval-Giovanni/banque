@@ -105,13 +105,16 @@ public class Branch {
         return ""+somme;
     }
 
-    private boolean verificationBranch(String number){
-        for (int i = 0;i<this.bankAccounts.length;i++){
-            if(this.bankAccounts[i].getNumber().equals(number)){
-                return false;
+    public boolean verificationNumber(String number)
+    //deux comptes ne peuvent avoir le meme attribut number dans une meme branche
+    {
+        for(BankAccount account : this.bankAccounts){
+            if (account.getNumber().equals(number))
+            {
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
 

@@ -99,23 +99,35 @@ public class Bank {
         System.out.println(Arrays.toString(order));
 
         boucle:switch (order[0]){
-            case "build":
-                if (verificationBank(order[1])){
+            case "build": //ouvrir une branche
+                if (verificationBank(order[1])){ //on verifie si cette branche existe
                     break boucle;
                 }
                this.build(order[1]);
                break;
 
-            case "dismantle":
-                this.dismantle(order[1]);
+            case "dismantle": //on ferme une branche
+                if (verificationBank(order[1])){ //on vérifie qu'elle existe , sinon on ne fais rien
+                    this.dismantle(order[1]);
+                }
                 break;
 
-            case "open":
+            case "open": //on ouvre un compte
+                //on vérifie que les numero de transit et de compte fourni existe et sont correct.
+
+                if(verificationBank(order[1]) && this.getBranche(order[1]).verificationNumber(order[2]))
+                {
+                    break boucle;
+                }
                 this.getBranche(order[1]).open(order[2]);
                 break;
 
-            case "close":
-                this.getBranche(order[1]).close(order[2]);
+            case "close": //on ferme un compte
+                //on vérifie que les numero de transit et de compte fourni existe et sont correct.
+                if(verificationBank(order[1]) && this.getBranche(order[1]).verificationNumber(order[2]))
+                {
+                    this.getBranche(order[1]).close(order[2]);
+                }
                 break;
 
             case "deposit":
@@ -166,10 +178,10 @@ public class Bank {
             System.out.println("####################");
         }
         System.out.println("Bank total deposits = "+this.bankTotalDeposit());
+        System.out.println("-------------------");
     }
 
-    private boolean verificationBank(String transit) //vont contenir toute les verifications de Bank et
-                                                     //de meme pour les autres.
+    private boolean verificationBank(String transit) //vont contenir toute les verifications de Bank.
     {
         if (this.branches.length == 0){
             return false;
