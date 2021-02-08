@@ -123,7 +123,7 @@ public class Bank {
                 break;
 
             case "withdraw":
-                this.getBranche(order[1]).getBankAccount(order[2]).withDraw(Integer.parseInt(order[3]));
+                this.getBranche(order[1]).getBankAccount(order[2]).withDraw(Double.parseDouble(order[3]));
                 break;
 
             case "bonus":
@@ -146,7 +146,7 @@ public class Bank {
     }
 
     private void bonus(String amount){
-        Bank.BONUS = Integer.parseInt(amount);
+        Bank.BONUS = Double.parseDouble(amount);
     }
 
     private void report(){
@@ -165,6 +165,7 @@ public class Bank {
             System.out.println("    Total closed accounts = "+this.branches[j].getClosed_amount()+'$');
             System.out.println("####################");
         }
+        System.out.println("Bank total deposits = "+this.bankTotalDeposit());
     }
 
     private boolean verificationBank(String transit) //vont contenir toute les verifications de Bank et
@@ -181,6 +182,15 @@ public class Bank {
         return false;
     }
 
+    private double bankTotalDeposit() // renvoi la somme totale détenu par la banque dans les comptes ouvert.
+    {
+        double somme = 0;  //represente cette somme totale
+        for(Branch branche : this.branches){
+            somme += Double.parseDouble(branche.totalDeposit()); //on augmente somme des montant totaux de chaque
+                                                                 //branches ( uniquement pour les comptes ouverts)
+        };
+        return somme;
+    }
 
     public static double getBONUS(){
         return Bank.BONUS;
