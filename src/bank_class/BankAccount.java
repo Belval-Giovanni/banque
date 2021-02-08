@@ -19,18 +19,20 @@ public class BankAccount {
     //methode :
 
     public void deposit(double amount){
+        if (amount<0){
+            return;
+        }
         this.amount+=amount;
         this.lastOperation = "deposit "+amount+"$";
 
     }
 
     public void withDraw(double amount){
+        if (amount<0 || amount>this.getAmount()){
+            return;
+        }
         this.amount-=amount;
         this.lastOperation = "withdraw "+amount+"$";
-    }
-
-    public String getTransit() {
-        return transit;
     }
 
     public String getNumber() {
@@ -43,10 +45,6 @@ public class BankAccount {
 
     public String getLastOperation() {
         return lastOperation;
-    }
-
-    public void affichSolde(){
-        System.out.println(this.amount);
     }
 
 }

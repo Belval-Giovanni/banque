@@ -1,0 +1,24 @@
++++ Bank Report +++
+### Branch 92632 ###
+    1 active accounts.
+*** Account 92632:1891159
+    Balance = 9.0$
+    Last operation deposit 9.0$
+    Total deposits = 9.0$
+    0 closed accounts.
+    Total closed accounts = 0.0$
+####################
+### Branch 67974 ###
+    1 active accounts.
+*** Account 67974:7052283
+    Balance = 230.0$
+    Last operation withdraw 41.0$
+    Total deposits = 230.0$
+    1 closed accounts.
+    Total closed accounts = 67.0$
+####################
+Bank total deposits = 239.0$
+-------------------
++++ Bank Report +++
+Bank total deposits = 0.0$
+-------------------

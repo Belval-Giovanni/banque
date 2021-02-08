@@ -21,6 +21,9 @@ public class Branch {
     //methode de la classe :
     public void open(String number) //ouvre un nouveau compte de numero number
     {
+        if(verificationNumber(number)){
+            return;
+        }
         BankAccount[] copy = new BankAccount[this.bankAccounts.length+1];
         for(int i = 0;i< this.bankAccounts.length;i++){
             copy[i] = this.bankAccounts[i];
@@ -33,19 +36,19 @@ public class Branch {
 
     public void close(String number) //ferme le compte de numero number
     {
-        if (this.bankAccounts.length <1) {return ;} // cas ou il n'y a pas de compte.
+        if (verificationNumber(number)){
+            if (this.bankAccounts.length <1) {return ;} // cas ou il n'y a pas de compte.
 
-        if (this.bankAccounts.length == 1) {        //cas ou il n'y a q'une seule compte.
-            if (this.bankAccounts[0].getNumber().equals(number)){
-                this.closed_amount += this.bankAccounts[0].getAmount();
-                this.nbClosedAccount += 1;
-                this.bankAccounts = new BankAccount[0];
-                return;
-            }
-            else{               //si le nnuméro de compte est faux on ne fait rien
-                return;
+            if (this.bankAccounts.length == 1) {        //cas ou il n'y a q'une seule compte.
+                if (this.bankAccounts[0].getNumber().equals(number)){
+                    this.closed_amount += this.bankAccounts[0].getAmount();
+                    this.nbClosedAccount += 1;
+                    this.bankAccounts = new BankAccount[0];
+                    return;
+                }
             }
         }
+
 
         int position = -1;//position represente l'index de bankAccounts qu'on veux suprimmé
         BankAccount[] copy = new BankAccount[this.bankAccounts.length-1];
@@ -105,14 +108,19 @@ public class Branch {
         return ""+somme;
     }
 
-    public boolean verificationNumber(String number)
-    //deux comptes ne peuvent avoir le meme attribut number dans une meme branche
+    private boolean verificationNumber(String number)
+    //verification d'un numéro de compte fourni en argument.
     {
+        //deux comptes ne peuvent avoir le meme attribut number dans une meme branche
         for(BankAccount account : this.bankAccounts){
             if (account.getNumber().equals(number))
             {
                 return true;
             }
+        }
+        //un numéro de compte ne peux etre negatif ou nul
+        if(Integer.parseInt(number)<=0){
+            return true;
         }
         return false;
     }
@@ -136,14 +144,4 @@ public class Branch {
         return nbClosedAccount;
     }
 
-    //test
-    public void printCompte() {
-        System.out.println("_________________________________________");
-        System.out.println("branche :"+this.getTransit());
-        System.out.println("_________________________________________");
-        for(int i = 0;i< this.bankAccounts.length;i++){
-            System.out.println("number :"+this.bankAccounts[i].getNumber());
-
-        }
-    }
 }
