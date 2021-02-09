@@ -120,14 +120,19 @@ public class Bank {
             case "deposit"://on depose de l'argent sur un compte
                 if (verificationBank(order[1]))//on verifit que le numero de transit est valide
                 {
-                    this.getBranche(order[1]).getBankAccount(order[2]).deposit(Double.parseDouble(order[3]));
+                    if(this.getBranche(order[1]).verificationNumber(order[2]))
+                    {
+                        this.getBranche(order[1]).getBankAccount(order[2]).deposit(Double.parseDouble(order[3]));
+                    }
                 }
                 break;
 
             case "withdraw"://on retire de l'argent d'un compte
                 if (verificationBank(order[1]))//on verifie que le numero de transit est valide
                 {
-                    this.getBranche(order[1]).getBankAccount(order[2]).withDraw(Double.parseDouble(order[3]));
+                    if(this.getBranche(order[1]).verificationNumber(order[2])){
+                        this.getBranche(order[1]).getBankAccount(order[2]).withDraw(Double.parseDouble(order[3]));
+                    }
                 }
                 break;
 
@@ -139,11 +144,11 @@ public class Bank {
                 this.report();
                 break;
 
-            case "short-report":
+            case "short-report"://affiche une version courte de report
                 this.shortReport();
                 break ;
 
-            default:
+            default: // cas ou la commande rentré dans la console n'est pas identifié
                 break ;
 
 
@@ -213,7 +218,8 @@ public class Bank {
     }
 
     private boolean verificationBank(String transit) //vont contenir toute les verifications de Bank.
-            //renvoi false si aucun probleme
+            //renvoi false si la branche de numero de transit fourni en argument
+            //n'existe pas , et renvoi true dans le cas contraire.
     {
         //cas ou il n'y a pas de branche
         if (this.branches.length == 0){
