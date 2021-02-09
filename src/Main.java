@@ -1,5 +1,4 @@
-import bank_class.Bank;
-import bank_class.Branch;
+import devoir1_p1212021.Bank;
 
 import java.util.Scanner;
 

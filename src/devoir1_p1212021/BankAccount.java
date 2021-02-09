@@ -1,4 +1,4 @@
-package bank_class;
+package devoir1_p1212021;
 
 public class BankAccount {
 
