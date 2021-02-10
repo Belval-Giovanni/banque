@@ -19,7 +19,7 @@ public class Branch {
     }
 
     //methode de la classe :
-    public void open(String number) //ouvre un nouveau compte de numero number
+    protected void open(String number) //ouvre un nouveau compte de numero number
     {
         if(verificationNumber(number)) //si le numero existe deja alors on ne fait rien
         {
@@ -43,7 +43,7 @@ public class Branch {
     }
 
 
-    public void close(String number) //ferme le compte de numero number
+    protected void close(String number) //ferme le compte de numero number
     {
         if (verificationNumber(number)) {
             if (this.bankAccounts.length < 1) {
@@ -110,7 +110,7 @@ public class Branch {
         return transit;
     }
 
-    public BankAccount getBankAccount(String number) //renvoi l'instance du compte de numero number
+    protected BankAccount getBankAccount(String number) //renvoi l'instance du compte de numero number
     {
         for(int i = 0;i<this.bankAccounts.length;i++){
             if (this.bankAccounts[i].getNumber().equals(number)){
@@ -120,7 +120,7 @@ public class Branch {
         return null;
     }
 
-    public String totalDeposit() //argent total des compte ouvert
+    protected String totalDeposit() //argent total des compte ouvert
     {
         double somme = 0;
         for(int i = 0; i<this.bankAccounts.length;i++){
@@ -129,7 +129,7 @@ public class Branch {
         return ""+somme;
     }
 
-    public boolean verificationNumber(String number)
+    protected boolean verificationNumber(String number)
     //verification d'un numéro de compte fourni en argument.
             //renvoi true si le compte de numéro donné en argument existe deja.
     {

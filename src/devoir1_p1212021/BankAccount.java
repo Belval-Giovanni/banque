@@ -18,7 +18,7 @@ public class BankAccount {
 
     //methode :
 
-    public void deposit(double amount) //on depose le montant amount sur le compte
+    protected void deposit(double amount) //on depose le montant amount sur le compte
     {
         if (amount<0)//on ne peux pas déposé un montant negatif
         {
@@ -29,7 +29,7 @@ public class BankAccount {
 
     }
 
-    public void withDraw(double amount) //on retire de l'argent sur le compte
+    protected void withDraw(double amount) //on retire de l'argent sur le compte
     {
         if (amount<0 || amount>this.getAmount())//on ne peux pas retiré un montant négatif
                                                 //ou que l'on ne possede pas sur son compte
@@ -48,7 +48,7 @@ public class BankAccount {
         return amount;
     }
 
-    public String getLastOperation() {
+    protected String getLastOperation() {
         return lastOperation;
     }
 

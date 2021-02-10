@@ -80,7 +80,7 @@ public class Bank {
 
     }
 
-    public Branch getBranche(String transit)
+    protected Branch getBranche(String transit)
     //retourne la refference de la branche de numero de transit donné en argument.
     {
         for(int i = 0;i<this.branches.length;i++){
